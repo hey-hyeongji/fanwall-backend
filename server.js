@@ -19,12 +19,24 @@ app.get('/api/changes/:section', async (req, res) => {
 });
 
 app.post('/api/changes', async (req, res) => {
-  const { section, slotNum, text, color, link, desc, image } = req.body;
+  const {
+    section,
+    slotNum,
+    text,
+    color,
+    link,
+    desc,
+    image,
+    fontColor,
+    fontSize
+  } = req.body;
+
   const change = await Change.findOneAndUpdate(
     { section, slotNum },
-    { text, color, link, desc, image },
+    { text, color, link, desc, image, fontColor, fontSize },
     { upsert: true, new: true }
   );
+
   res.json(change);
 });
 
